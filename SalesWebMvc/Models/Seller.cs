@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace SalesWebMvc.Models
@@ -8,8 +9,16 @@ namespace SalesWebMvc.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
+
+        [DataType(DataType.EmailAddress)] /*Cria um redirecionamento para envio de email deixando o email como link (necessário configurar email de envio)*/
         public string Email { get; set; }
+
+        [Display(Name ="Birth Date")] /*Alterar o front-end ou display da tabela, nesse caso o campo Data de Aniversário*/
+        [DataType(DataType.Date)] /*Deixa somente a data, remove o campo horas*/
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime BirthDate { get; set; }
+        [Display(Name = "Base Salary")] /*altera o front-end Salario Base, colocando espaço entre o nome*/
+        [DisplayFormat(DataFormatString = "{0:F2}")] /*F2 = 2 casas decimais*/
         public double BaseSalary { get; set; }
         public Department Department { get; set; }
         public int DepartmentId { get; set; }

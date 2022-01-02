@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace SalesWebMvc.Services
 {
@@ -29,7 +31,7 @@ namespace SalesWebMvc.Services
 
         public Seller FindById(int id)
         {
-            return _context.Seller.FirstOrDefault(obj => obj.Id == id);
+            return _context.Seller.Include(obj => obj.Department).FirstOrDefault(obj => obj.Id == id); /*EagerLoanding, Carregar Objetos Associados Ao Objeto Principal "A inclusão é feita primeiro e depois o restante"*/
         }
 
         public void Remove(int id)
@@ -41,7 +43,7 @@ namespace SalesWebMvc.Services
 
         public void Update(Seller obj)
         {
-            if (!_context.Seller.Any(x => x.Id == obj.Id))
+            if (!_context.Seller.Any(x => x.Id == obj.Id)) /*Testar se o ID já existe, A exclamção no começo indica que "Se não existir... faça"*/
             {
                 throw new NotFoundException("Id not found");
             }
