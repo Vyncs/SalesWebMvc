@@ -54,7 +54,7 @@ namespace SalesWebMvc
         {
             //Definir Opções de Localizações
             var enUS = new CultureInfo("en-US");
-            var localizationOption = new RequestLocalizationOptions
+            var localizationOptions = new RequestLocalizationOptions
             {
                 DefaultRequestCulture = new RequestCulture(enUS), /*Qual vai ser o Local padrão da aplicação*/
                 SupportedCultures = new List<CultureInfo> { enUS }, /*Quais são os locais possiveis na aplicação*/
@@ -62,7 +62,7 @@ namespace SalesWebMvc
 
             };
 
-            app.UseRequestLocalization(localizationOption);
+            app.UseRequestLocalization(localizationOptions);
             //fim opções localizações
             
             if (env.IsDevelopment())
